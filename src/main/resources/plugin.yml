@@ -1,0 +1,4 @@
+name: XpMultiplierPlus
+version: '${project.version}'
+main: org.kasun.xpmultiplierplus.XpMultiplierPlus
+api-version: '1.13'

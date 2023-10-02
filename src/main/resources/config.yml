@@ -1,0 +1,16 @@
+multipliers:
+  1:
+    multiplier: 1
+    permission: "xpm.1"
+  2:
+    multiplier: 1.1
+    permission: "xpm.1.1"
+  3:
+    multiplier: 1.2
+    permission: "xpm.1.2"
+  4:
+    multiplier: 1.3
+    permission: "xpm.1.3"
+  5:
+    multiplier: 1.4
+    permission: "xpm.1.4"
