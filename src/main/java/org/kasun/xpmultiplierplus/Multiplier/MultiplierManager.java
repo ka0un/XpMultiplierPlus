@@ -12,6 +12,19 @@ public class MultiplierManager {
         multipliers = new HashMap<>();
     }
 
+    public HashMap<UUID, Multiplier> getMultipliers() {
+        return multipliers;
+    }
 
+    public void setMultipliers(HashMap<UUID, Multiplier> multipliers) {
+        this.multipliers = multipliers;
+    }
 
+    public double getDefaultMultiplier() {
+        return defaultMultiplier;
+    }
+
+    public void setDefaultMultiplier(double defaultMultiplier) {
+        this.defaultMultiplier = defaultMultiplier;
+    }
 }

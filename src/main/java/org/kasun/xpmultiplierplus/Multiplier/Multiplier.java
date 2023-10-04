@@ -1,6 +1,6 @@
 package org.kasun.xpmultiplierplus.Multiplier;
 
-import java.sql.Timestamp;
+
 
 public class Multiplier {
     private double multiplier = 1.0;
