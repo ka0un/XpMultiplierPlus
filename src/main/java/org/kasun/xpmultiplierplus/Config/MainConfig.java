@@ -16,7 +16,7 @@ public class MainConfig {
     XpMultiplierPlus plugin = XpMultiplierPlus.getInstance();
     private File configFile;
     private FileConfiguration config;
-    private HashMap<String, String> langMap = new HashMap<>();
+    public HashMap<String, String> langMap = new HashMap<>();
 
 
     public MainConfig() {

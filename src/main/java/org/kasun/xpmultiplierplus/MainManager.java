@@ -6,8 +6,10 @@ import org.kasun.xpmultiplierplus.Listeners.ListenerManager;
 import org.kasun.xpmultiplierplus.Multiplier.MultiplierManager;
 import org.kasun.xpmultiplierplus.Runnables.RunnableManager;
 import org.kasun.xpmultiplierplus.utils.FileManager;
+import org.kasun.xpmultiplierplus.utils.StartupManager;
 
 public class MainManager {
+    private StartupManager startupManager;
     private FileManager fileManager;
     private ConfigManager configManager;
     private MultiplierManager multiplierManager;
@@ -19,6 +21,7 @@ public class MainManager {
     public MainManager() {
         fileManager = new FileManager();
         configManager = new ConfigManager();
+        startupManager = new StartupManager(configManager);
         multiplierManager = new MultiplierManager();
         commandsManager = new CommandsManager();
         listenerManager = new ListenerManager();

@@ -2,3 +2,8 @@ name: XpMultiplierPlus
 version: '${project.version}'
 main: org.kasun.xpmultiplierplus.XpMultiplierPlus
 api-version: '1.13'
+description: Xp Multiplier Plugin
+author: Kasun Hapangama
+website: https://ka0un.github.io/xpm/
+softdepend:
+  - PlaceholderAPI
