@@ -5,15 +5,19 @@ import org.kasun.xpmultiplierplus.Config.ConfigManager;
 import org.kasun.xpmultiplierplus.Listeners.ListenerManager;
 import org.kasun.xpmultiplierplus.Multiplier.MultiplierManager;
 import org.kasun.xpmultiplierplus.Runnables.RunnableManager;
+import org.kasun.xpmultiplierplus.utils.FileManager;
 
 public class MainManager {
+    private FileManager fileManager;
     private ConfigManager configManager;
     private MultiplierManager multiplierManager;
     private CommandsManager commandsManager;
     private ListenerManager listenerManager;
     private RunnableManager runnableManager;
 
+
     public MainManager() {
+        fileManager = new FileManager();
         configManager = new ConfigManager();
         multiplierManager = new MultiplierManager();
         commandsManager = new CommandsManager();

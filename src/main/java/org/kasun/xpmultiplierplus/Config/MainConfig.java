@@ -7,13 +7,16 @@ import org.kasun.xpmultiplierplus.XpMultiplierPlus;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainConfig {
     public List<Multiplier> multipliers;
+    public String lang;
     XpMultiplierPlus plugin = XpMultiplierPlus.getInstance();
     private File configFile;
     private FileConfiguration config;
+    private HashMap<String, String> langMap = new HashMap<>();
 
 
     public MainConfig() {
@@ -21,7 +24,18 @@ public class MainConfig {
         plugin.saveDefaultConfig();
         configFile = new File(plugin.getDataFolder(), "config.yml");
         config = YamlConfiguration.loadConfiguration(configFile);
+        loadLang();
         loadMultipliers();
+    }
+
+    public void loadLang(){
+        lang = config.getString("lang");
+        File langFile = new File(plugin.getDataFolder(), "/lang/" + lang + ".yml");
+        FileConfiguration langConfig = YamlConfiguration.loadConfiguration(langFile);
+        for (String key : langConfig.getConfigurationSection("lang").getKeys(false)) {
+            String value = langConfig.getString("lang." + key);
+            langMap.put(key, value);
+        }
     }
 
     public void loadMultipliers(){
