@@ -21,5 +21,6 @@ public class StartupManager {
         plugin.getLogger().info(ColorUtils.color( mainConfig.langMap.get("startup-message-2").replace("%author%", plugin.getDescription().getAuthors().toString())));
         plugin.getLogger().info(ColorUtils.color( mainConfig.langMap.get("startup-message-3").replace("%website%", plugin.getDescription().getWebsite())));
         plugin.getLogger().info(ColorUtils.color(" "));
+        UpdateChecker updateChecker = new UpdateChecker(plugin, "https://github.com/ka0un/dashboard/blob/main/xpm/version.txt", plugin.getDescription().getVersion());
     }
 }
