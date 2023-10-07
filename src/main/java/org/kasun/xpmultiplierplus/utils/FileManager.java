@@ -1,4 +1,4 @@
-package org.kasun.xpmultiplierplus.utils;
+package org.kasun.xpmultiplierplus.Utils;
 
 import org.kasun.xpmultiplierplus.XpMultiplierPlus;
 

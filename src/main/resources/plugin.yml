@@ -7,3 +7,12 @@ author: Kasun Hapangama
 website: https://ka0un.github.io/xpm/
 softdepend:
   - PlaceholderAPI
+commands:
+    xpm:
+        description: XpMultiplierPlus Commands
+        usage: /xpm
+        aliases:
+        - xpmultiplierplus
+        - xpmultiplier
+
+

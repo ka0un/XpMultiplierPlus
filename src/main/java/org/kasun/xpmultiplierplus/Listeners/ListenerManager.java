@@ -7,6 +7,7 @@ public class ListenerManager {
     public ListenerManager() {
         XpMultiplierPlus plugin = XpMultiplierPlus.getInstance();
         plugin.getServer().getPluginManager().registerEvents(new XpListener(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), plugin);
     }
 
 }

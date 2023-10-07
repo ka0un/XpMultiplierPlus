@@ -5,10 +5,12 @@ import org.kasun.xpmultiplierplus.Config.ConfigManager;
 import org.kasun.xpmultiplierplus.Listeners.ListenerManager;
 import org.kasun.xpmultiplierplus.Multiplier.MultiplierManager;
 import org.kasun.xpmultiplierplus.Runnables.RunnableManager;
-import org.kasun.xpmultiplierplus.utils.FileManager;
-import org.kasun.xpmultiplierplus.utils.StartupManager;
+import org.kasun.xpmultiplierplus.Utils.FileManager;
+import org.kasun.xpmultiplierplus.Utils.OutdatedReminder;
+import org.kasun.xpmultiplierplus.Utils.StartupManager;
 
 public class MainManager {
+    private OutdatedReminder outdatedReminder;
     private StartupManager startupManager;
     private FileManager fileManager;
     private ConfigManager configManager;
@@ -21,7 +23,8 @@ public class MainManager {
     public MainManager() {
         fileManager = new FileManager();
         configManager = new ConfigManager();
-        startupManager = new StartupManager(configManager);
+        outdatedReminder = new OutdatedReminder(configManager);
+        startupManager = new StartupManager(configManager, outdatedReminder);
         multiplierManager = new MultiplierManager();
         commandsManager = new CommandsManager();
         listenerManager = new ListenerManager();
@@ -31,6 +34,38 @@ public class MainManager {
 
     //getters and setters
 
+
+    public OutdatedReminder getOutdatedReminder() {
+        return outdatedReminder;
+    }
+
+    public void setOutdatedReminder(OutdatedReminder outdatedReminder) {
+        this.outdatedReminder = outdatedReminder;
+    }
+
+    public StartupManager getStartupManager() {
+        return startupManager;
+    }
+
+    public void setStartupManager(StartupManager startupManager) {
+        this.startupManager = startupManager;
+    }
+
+    public FileManager getFileManager() {
+        return fileManager;
+    }
+
+    public void setFileManager(FileManager fileManager) {
+        this.fileManager = fileManager;
+    }
+
+    public RunnableManager getRunnableManager() {
+        return runnableManager;
+    }
+
+    public void setRunnableManager(RunnableManager runnableManager) {
+        this.runnableManager = runnableManager;
+    }
 
     public ConfigManager getConfigManager() {
         return configManager;

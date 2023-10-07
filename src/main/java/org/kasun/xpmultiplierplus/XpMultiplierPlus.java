@@ -12,6 +12,7 @@ public final class XpMultiplierPlus extends JavaPlugin {
         plugin = this;
         mainManager = new MainManager();
 
+
     }
 
     @Override
