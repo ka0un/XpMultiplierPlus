@@ -1,6 +1,5 @@
 package org.kasun.xpmultiplierplus.Runnables;
 
-import org.bukkit.Bukkit;
 import org.kasun.xpmultiplierplus.XpMultiplierPlus;
 
 public class RunnableManager {

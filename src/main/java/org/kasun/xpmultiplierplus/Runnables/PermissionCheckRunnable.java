@@ -2,7 +2,6 @@ package org.kasun.xpmultiplierplus.Runnables;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.kasun.xpmultiplierplus.Multiplier.Multiplier;
 import org.kasun.xpmultiplierplus.Multiplier.MultiplierManager;
