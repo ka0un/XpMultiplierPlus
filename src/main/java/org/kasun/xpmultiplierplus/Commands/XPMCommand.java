@@ -6,6 +6,7 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.kasun.xpmultiplierplus.Commands.Admin.AdminCommandManager;
 import org.kasun.xpmultiplierplus.Config.MainConfig;
+import org.kasun.xpmultiplierplus.Multiplier.Multiplier;
 import org.kasun.xpmultiplierplus.Utils.ColorUtils;
 import org.kasun.xpmultiplierplus.XpMultiplierPlus;
 
@@ -52,17 +53,38 @@ public class XPMCommand implements TabExecutor {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
-        if (args.length == 1) {
-            List<String> arguments = new ArrayList<>();
-            arguments.add("admin");
-            return arguments;
-        }
-        if (args[0].equalsIgnoreCase("forcesend")) {
-            if (args.length == 2) {
-                return null;
-            }
+        plugin = XpMultiplierPlus.getInstance();
+        mainConfig = plugin.getMainManager().getConfigManager().getMainConfig();
 
+        switch (args.length){
+            case 1:
+                List<String> arguments = new ArrayList<>();
+                arguments.add("admin");
+                return arguments;
+            case 2:
+                List<String> arguments2 = new ArrayList<>();
+                arguments2.add("help");
+                arguments2.add("set");
+                arguments2.add("reload");
+                return arguments2;
+            case 3:
+                List<String> arguments3 = new ArrayList<>();
+                if (args[1].equalsIgnoreCase("set")){
+                    for (Player player : plugin.getServer().getOnlinePlayers()){
+                        arguments3.add(player.getName());
+                    }
+                }
+                return arguments3;
+            case 4:
+                List<String> arguments4 = new ArrayList<>();
+                if (args[1].equalsIgnoreCase("set")){
+                    for (Multiplier m: plugin.getMainManager().getConfigManager().getMainConfig().multipliers){
+                        arguments4.add(String.valueOf(m.getMultiplier()));
+                    }
+                }
+                return arguments4;
         }
+
         return null;
     }
 

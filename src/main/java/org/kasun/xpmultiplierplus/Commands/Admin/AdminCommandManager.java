@@ -17,6 +17,13 @@ public class AdminCommandManager {
         if (args.length == 1){
             new AdminHelp(sender);
         }else{
+            if (args[1].equalsIgnoreCase("help")) {
+                new AdminHelp(sender);
+            }else if (args[1].equalsIgnoreCase("set")){
+                new AdminSet(sender, command, label, args);
+            }else{
+                new AdminHelp(sender);
+            }
         }
     }
 }
