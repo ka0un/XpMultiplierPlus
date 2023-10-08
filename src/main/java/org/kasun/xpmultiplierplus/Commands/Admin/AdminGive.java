@@ -4,23 +4,25 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.kasun.xpmultiplierplus.Config.MainConfig;
 import org.kasun.xpmultiplierplus.Multiplier.Multiplier;
+import org.kasun.xpmultiplierplus.Multiplier.TempMultiplier;
 import org.kasun.xpmultiplierplus.Utils.ColorUtils;
 import org.kasun.xpmultiplierplus.XpMultiplierPlus;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-public class AdminSet {
+public class AdminGive {
     private CommandSender sender;
     private Command command;
     private String label;
     private String[] args;
     private XpMultiplierPlus plugin;
     private List<Multiplier> multipliers;
-    private HashMap<UUID, Multiplier> multiplierMap;
+    private HashMap<UUID, List<Multiplier>> multiplierMap;
 
-    public AdminSet(CommandSender sender, Command command, String label, String[] args) {
+    public AdminGive(CommandSender sender, Command command, String label, String[] args) {
         plugin = XpMultiplierPlus.getInstance();
         MainConfig mainConfig = plugin.getMainManager().getConfigManager().getMainConfig();
         this.sender = sender;
@@ -33,12 +35,12 @@ public class AdminSet {
         //xpm admin set <player> <multiplier>
 
         if (args.length == 2) {
-            sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-set-usage")));
+            sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-usage")));
             return;
         }
 
         if (args.length == 3) {
-            sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-set-usage")));
+            sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-usage")));
             return;
         }
 
@@ -49,7 +51,7 @@ public class AdminSet {
             }
 
             if (args[3].equalsIgnoreCase("0")) {
-                sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-set-usage")));
+                sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-usage")));
                 return;
             }
 
@@ -65,23 +67,32 @@ public class AdminSet {
             }
 
             if (!found) {
-                sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-set-usage")));
+                sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-usage")));
                 return;
             }
 
             //check if player already has a multiplier
-            if (multiplierMap.containsKey(plugin.getServer().getPlayer(args[2]).getUniqueId())) {
-                multiplierMap.remove(plugin.getServer().getPlayer(args[2]).getUniqueId());
-                Multiplier multiplier = multipliers.get(indexOfMultiplier);
-                multiplierMap.put(plugin.getServer().getPlayer(args[2]).getUniqueId(), multiplier);
-                sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-set-success").replace("%player%", args[2]).replace("%multiplier%", args[3])));
-                return;
+
+            Multiplier multiplier = multipliers.get(indexOfMultiplier);
+            List<Multiplier> multiplierList = multiplierMap.get(plugin.getServer().getPlayer(args[2]).getUniqueId());
+
+            if (multiplierList != null) {
+                for (Multiplier m : multiplierList) {
+                    if (m.getMultiplier() == multiplier.getMultiplier()) {
+                        if (m instanceof TempMultiplier){
+                            ((TempMultiplier) m).setTimeSecounds(((TempMultiplier) m).getTimeSecounds() * 2);
+                        }
+                    }
+                }
             }else{
-                Multiplier multiplier = multipliers.get(indexOfMultiplier);
-                multiplierMap.put(plugin.getServer().getPlayer(args[2]).getUniqueId(), multiplier);
-                sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-set-success").replace("%player%", args[2]).replace("%multiplier%", args[3])));
-                return;
+                multiplierList = new ArrayList<>();
             }
+
+            multiplierList.add(multiplier);
+            multiplierMap.put(plugin.getServer().getPlayer(args[2]).getUniqueId(), multiplierList);
+            sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-success").replace("%player%", args[2]).replace("%multiplier%", args[3])));
+            return;
+
         }
     }
 }

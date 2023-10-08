@@ -19,8 +19,8 @@ public class AdminCommandManager {
         }else{
             if (args[1].equalsIgnoreCase("help")) {
                 new AdminHelp(sender);
-            }else if (args[1].equalsIgnoreCase("set")){
-                new AdminSet(sender, command, label, args);
+            }else if (args[1].equalsIgnoreCase("give")){
+                new AdminGive(sender, command, label, args);
             }else{
                 new AdminHelp(sender);
             }

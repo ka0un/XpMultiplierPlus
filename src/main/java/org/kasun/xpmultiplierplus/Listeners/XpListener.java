@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.kasun.xpmultiplierplus.Multiplier.Multiplier;
 import org.kasun.xpmultiplierplus.Multiplier.MultiplierManager;
+import org.kasun.xpmultiplierplus.Multiplier.MultiplierProvider;
 import org.kasun.xpmultiplierplus.XpMultiplierPlus;
 
 import java.util.List;
@@ -31,7 +32,8 @@ public class XpListener implements Listener {
         UUID uuid = player.getUniqueId();
 
         if (multiplierManager.getMultipliers().containsKey(uuid)) {
-            Multiplier m = multiplierManager.getMultipliers().get(uuid);
+            MultiplierProvider multiplierProvider = new MultiplierProvider(multiplierManager.getMultipliers());
+            Multiplier m = multiplierProvider.getPlayersBestMultiplier(uuid);
             event.setAmount((int) (xp * m.getMultiplier()));
             player.sendMessage("You have " + m.getMultiplier() + "X XP!");
             return;
