@@ -4,19 +4,19 @@ import java.sql.Timestamp;
 
 public class TempMultiplier extends Multiplier{
 
-    private int timeSecounds;
+    private long timeSecounds;
     private Timestamp startTime;
-    public TempMultiplier(double multiplier, String permission, Timestamp startTime, int timeSecounds) {
+    public TempMultiplier(double multiplier, String permission, Timestamp startTime, long timeSecounds) {
         super(multiplier, permission);
         this.startTime = startTime;
         this.timeSecounds = timeSecounds;
     }
 
-    public int getTimeSecounds() {
+    public long getTimeSecounds() {
         return timeSecounds;
     }
 
-    public void setTimeSecounds(int timeSecounds) {
+    public void setTimeSecounds(long timeSecounds) {
         this.timeSecounds = timeSecounds;
     }
 

@@ -8,10 +8,7 @@ import org.kasun.xpmultiplierplus.Multiplier.MultiplierManager;
 import org.kasun.xpmultiplierplus.Multiplier.TempMultiplier;
 import org.kasun.xpmultiplierplus.XpMultiplierPlus;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class PermissionCheckRunnable extends BukkitRunnable {
 
@@ -70,17 +67,24 @@ public class PermissionCheckRunnable extends BukkitRunnable {
         }
 
         //if temp multiplier outdated removes it
-        for (UUID uuid : multiplierManager.getMultipliers().keySet()) {
-            if (multiplierManager.getMultipliers().get(uuid) instanceof TempMultiplier) {
-                if (((TempMultiplier) multiplierManager.getMultipliers().get(uuid)).getStartTime() != null) {
-                    if (((TempMultiplier) multiplierManager.getMultipliers().get(uuid)).getTimeSecounds() != 0) {
-                        if (((TempMultiplier) multiplierManager.getMultipliers().get(uuid)).getStartTime().getTime() + (((TempMultiplier) multiplierManager.getMultipliers().get(uuid)).getTimeSecounds() * 1000) < System.currentTimeMillis()) {
-                            multiplierManager.getMultipliers().remove(uuid);
+        try {
+
+            for (UUID uuid : multiplierManager.getMultipliers().keySet()) {
+                List<Multiplier> playersMultiplierList = multiplierManager.getMultipliers().get(uuid);
+                for (Multiplier m : playersMultiplierList) {
+                    if (m instanceof TempMultiplier) {
+                        if (((TempMultiplier) m).getStartTime() != null) {
+                            if (((TempMultiplier) m).getTimeSecounds() != 0) {
+                                if (((TempMultiplier) m).getStartTime().getTime() + (((TempMultiplier) m).getTimeSecounds() * 1000) < System.currentTimeMillis()) {
+                                    multiplierManager.getMultipliers().get(uuid).remove(m);
+                                }
+                            }
                         }
                     }
                 }
             }
-        }
+        }catch (ConcurrentModificationException ignored){
 
+        }
     }
 }

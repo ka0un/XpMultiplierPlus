@@ -10,7 +10,7 @@ lang:
   admin-help-6: "&8| &6/xpm admin clear <player> &8- &7Clears the player's multipliers &8|"
   admin-help-7: "&8| &6/xpm admin clear GLOBAL &8- &7Clears the Global Multiplier &8|"
   no-permission: "&cYou don't have permission to do that!"
-  admin-give-usage: "&cUsage: /xpm admin set <player> <multiplier>"
-  admin-give-success: "&aSuccessfully set %player%'s multiplier to %multiplier%!"
-
+  admin-give-usage: "&cUsage: /xpm admin give <player> <multiplier>"
+  admin-give-success: "&aSuccessfully gave %player%'s multiplier to %multiplier%!"
+  admin-give-success-temp: "&aSuccessfully gave %player%'s multiplier to %multiplier% for %time%!"
   player-not-found: "&cPlayer not found!"

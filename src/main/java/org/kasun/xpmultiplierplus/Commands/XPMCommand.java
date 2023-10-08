@@ -83,6 +83,14 @@ public class XPMCommand implements TabExecutor {
                     }
                 }
                 return arguments4;
+            case 5:
+                List<String> arguments5 = new ArrayList<>();
+                if (args[1].equalsIgnoreCase("give")){
+                    arguments5.add("PERMANENT");
+                    arguments5.add("5s");
+                    arguments5.add("1H");
+                }
+                return arguments5;
         }
 
         return null;
