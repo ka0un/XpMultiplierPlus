@@ -19,6 +19,8 @@ public class MainConfig {
     private FileConfiguration config;
     public HashMap<String, String> langMap = new HashMap<>();
     public double defaultMultiplier;
+    public int debugPeriod;
+    public boolean debugEnabled;
 
 
     public MainConfig() {
@@ -29,8 +31,14 @@ public class MainConfig {
         loadLang();
         loadMultipliers();
         loadMainSettings();
+        loadDebugSettings();
     }
 
+    public void loadDebugSettings(){
+        ConfigurationSection debugSection = config.getConfigurationSection("debug-settings");
+        debugEnabled = debugSection.getBoolean("debug");
+        debugPeriod = debugSection.getInt("debug-period");
+    }
     public void loadMainSettings(){
         ConfigurationSection mainSection = config.getConfigurationSection("main-settings");
         defaultMultiplier = mainSection.getDouble("default-multiplier");

@@ -30,7 +30,7 @@ public class MainManager {
         multiplierManager.getGlobalMultipliers().add(new GlobalMultiplier(configManager.getMainConfig().defaultMultiplier, false, 0 , null));
         commandsManager = new CommandsManager();
         listenerManager = new ListenerManager();
-        runnableManager = new RunnableManager();
+        runnableManager = new RunnableManager(configManager);
     }
 
 

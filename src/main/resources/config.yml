@@ -18,3 +18,7 @@ multipliers:
   5:
     multiplier: 1.4
     permission: "xpm.1.4"
+
+debug-settings:
+  debug : true
+  debug-period: 5
