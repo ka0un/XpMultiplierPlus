@@ -25,6 +25,7 @@ public class PermissionCheckRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
+
         multipliers = plugin.getMainManager().getConfigManager().getMainConfig().multipliers;
         multiplierManager = plugin.getMainManager().getMultiplierManager();
 
@@ -67,24 +68,28 @@ public class PermissionCheckRunnable extends BukkitRunnable {
         }
 
         //if temp multiplier outdated removes it
-        try {
+        HashMap<UUID, Multiplier> removeMuliplierMap = new HashMap<>();
 
-            for (UUID uuid : multiplierManager.getMultipliers().keySet()) {
-                List<Multiplier> playersMultiplierList = multiplierManager.getMultipliers().get(uuid);
-                for (Multiplier m : playersMultiplierList) {
-                    if (m instanceof TempMultiplier) {
-                        if (((TempMultiplier) m).getStartTime() != null) {
-                            if (((TempMultiplier) m).getTimeSecounds() != 0) {
-                                if (((TempMultiplier) m).getStartTime().getTime() + (((TempMultiplier) m).getTimeSecounds() * 1000) < System.currentTimeMillis()) {
-                                    multiplierManager.getMultipliers().get(uuid).remove(m);
-                                }
+        for (UUID uuid : multiplierManager.getMultipliers().keySet()) {
+            List<Multiplier> playersMultiplierList = multiplierManager.getMultipliers().get(uuid);
+            for (Multiplier m : playersMultiplierList) {
+                if (m instanceof TempMultiplier) {
+                    if (((TempMultiplier) m).getStartTime() != null) {
+                        if (((TempMultiplier) m).getTimeSecounds() != 0) {
+                            if (((TempMultiplier) m).getStartTime().getTime() + (((TempMultiplier) m).getTimeSecounds() * 1000) < System.currentTimeMillis()) {
+                                    removeMuliplierMap.put(uuid, m);
                             }
                         }
                     }
                 }
             }
-        }catch (ConcurrentModificationException ignored){
-
         }
+
+        if (removeMuliplierMap.size() != 0){
+            for (UUID uuid : removeMuliplierMap.keySet()){
+                multiplierManager.getMultipliers().get(uuid).remove(removeMuliplierMap.get(uuid));
+            }
+        }
+
     }
 }

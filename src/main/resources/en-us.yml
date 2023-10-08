@@ -14,3 +14,4 @@ lang:
   admin-give-success: "&aSuccessfully gave %player%'s multiplier to %multiplier%!"
   admin-give-success-temp: "&aSuccessfully gave %player%'s multiplier to %multiplier% for %time%!"
   player-not-found: "&cPlayer not found!"
+  admin-multiplier-not-found: "&cMultiplier not found! you have to config it first!"

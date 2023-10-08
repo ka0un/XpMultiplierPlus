@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.kasun.xpmultiplierplus.Config.MainConfig;
 import org.kasun.xpmultiplierplus.Multiplier.Multiplier;
+import org.kasun.xpmultiplierplus.Multiplier.PlayersMultipliersManager;
 import org.kasun.xpmultiplierplus.Multiplier.TempMultiplier;
 import org.kasun.xpmultiplierplus.Utils.ColorUtils;
 import org.kasun.xpmultiplierplus.Utils.TimeStringToSecondsConverter;
@@ -34,14 +35,9 @@ public class AdminGive {
         multipliers = plugin.getMainManager().getConfigManager().getMainConfig().multipliers;
         multiplierMap = plugin.getMainManager().getMultiplierManager().getMultipliers();
 
-        //xpm admin set <player> <multiplier>
+        //xpm admin set <player> <multiplier> <duration>
 
-        if (args.length == 2) {
-            sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-usage")));
-            return;
-        }
-
-        if (args.length == 3) {
+        if (args.length <= 3) {
             sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-usage")));
             return;
         }
@@ -57,20 +53,18 @@ public class AdminGive {
                 return;
             }
 
-            //check if given <multiplier> exisits in multiplier list
-            boolean found = false;
-            int indexOfMultiplier = 0;
-            for (Multiplier m : multipliers) {
-                if (m.getMultiplier() == Double.parseDouble(args[3])) {
-                    indexOfMultiplier = multipliers.indexOf(m);
-                    found = true;
-                    break;
-                }
+            PlayersMultipliersManager playersMultipliersManager = new PlayersMultipliersManager(plugin.getServer().getPlayer(args[2]).getUniqueId());
+
+            if (!playersMultipliersManager.isMultiplierExist(Double.parseDouble(args[3]))){
+                sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-multiplier-not-found")));
+                return;
             }
 
-            if (!found) {
-                sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-usage")));
-                return;
+            Multiplier multiplier = playersMultipliersManager.getMultiplierFromDouble(Double.parseDouble(args[3]));
+
+            if (args.length == 4){
+                playersMultipliersManager.addPermenentMuliplierToPlayer(multiplier);
+                sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-success").replace("%player%", args[2]).replace("%multiplier%", args[3])));
             }
 
             if (args.length == 5){
@@ -81,55 +75,14 @@ public class AdminGive {
                 }
 
                 if (args[4].equalsIgnoreCase("PERMANENT") || args.length == 4){
-                    Multiplier multiplier = multipliers.get(indexOfMultiplier);
-                    List<Multiplier> multiplierList = multiplierMap.get(plugin.getServer().getPlayer(args[2]).getUniqueId());
-
-                    if (multiplierList != null) {
-
-                    }else{
-                        multiplierList = new ArrayList<>();
-                    }
-
-                    multiplierList.add(multiplier);
-                    multiplierMap.put(plugin.getServer().getPlayer(args[2]).getUniqueId(), multiplierList);
-                    sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-success").replace("%player%", args[2]).replace("%multiplier%", args[3])));
-                    return;
+                    playersMultipliersManager.addPermenentMuliplierToPlayer(multiplier);
                 }else{
-
                     Long timeSecounds = TimeStringToSecondsConverter.convertToSeconds(args[4]);
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-                    TempMultiplier multiplier = new TempMultiplier(multipliers.get(indexOfMultiplier).getMultiplier(), "", timestamp, timeSecounds);
-                    List<Multiplier> multiplierList = multiplierMap.get(plugin.getServer().getPlayer(args[2]).getUniqueId());
-
-                    if (multiplierList != null) {
-                        for (Multiplier m : multiplierList) {
-                            if (m.getMultiplier() == multiplier.getMultiplier()) {
-                                if (m instanceof TempMultiplier){
-                                    ((TempMultiplier) m).setTimeSecounds(((TempMultiplier) m).getTimeSecounds() * 2);
-                                    sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-success-temp").replace("%player%", args[2]).replace("%multiplier%", args[3]).replace("%time%", args[4])));
-                                    return;
-                                }
-                            }
-                        }
-                    }else{
-                        multiplierList = new ArrayList<>();
-                    }
-
-                    try{
-                        multiplierList.add(multiplier);
-                        multiplierMap.put(plugin.getServer().getPlayer(args[2]).getUniqueId(), multiplierList);
-                        sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-success-temp").replace("%player%", args[2]).replace("%multiplier%", args[3]).replace("%time%", args[4])));
-                        return;
-                    }catch (Exception e){
-                        sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-usage")));
-                        return;
-                    }
-
+                    playersMultipliersManager.addTempMultiplierToPlayer(multiplier, timeSecounds, timestamp);
+                    sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-success-temp").replace("%player%", args[2]).replace("%multiplier%", args[3]).replace("%time%", args[4])));
                 }
-
             }
-
         }
     }
 }
