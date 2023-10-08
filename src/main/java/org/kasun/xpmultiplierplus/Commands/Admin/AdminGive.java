@@ -76,6 +76,7 @@ public class AdminGive {
 
                 if (args[4].equalsIgnoreCase("PERMANENT") || args.length == 4){
                     playersMultipliersManager.addPermenentMuliplierToPlayer(multiplier);
+                    sender.sendMessage(ColorUtils.color(mainConfig.langMap.get("admin-give-success").replace("%player%", args[2]).replace("%multiplier%", args[3])));
                 }else{
                     Long timeSecounds = TimeStringToSecondsConverter.convertToSeconds(args[4]);
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());

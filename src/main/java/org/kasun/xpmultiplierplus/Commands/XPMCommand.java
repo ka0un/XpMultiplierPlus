@@ -65,19 +65,22 @@ public class XPMCommand implements TabExecutor {
                 List<String> arguments2 = new ArrayList<>();
                 arguments2.add("help");
                 arguments2.add("give");
+                arguments2.add("take");
+                arguments2.add("view");
                 arguments2.add("reload");
                 return arguments2;
             case 3:
                 List<String> arguments3 = new ArrayList<>();
-                if (args[1].equalsIgnoreCase("give")){
+                if (args[1].equalsIgnoreCase("give") || args[1].equalsIgnoreCase("view") || args[1].equalsIgnoreCase("take")){
                     for (Player player : plugin.getServer().getOnlinePlayers()){
                         arguments3.add(player.getName());
                     }
                 }
                 return arguments3;
+
             case 4:
                 List<String> arguments4 = new ArrayList<>();
-                if (args[1].equalsIgnoreCase("give")){
+                if (args[1].equalsIgnoreCase("give") || args[1].equalsIgnoreCase("take")){
                     for (Multiplier m: plugin.getMainManager().getConfigManager().getMainConfig().multipliers){
                         arguments4.add(String.valueOf(m.getMultiplier()));
                     }

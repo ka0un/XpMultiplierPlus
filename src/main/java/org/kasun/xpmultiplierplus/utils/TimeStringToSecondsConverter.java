@@ -49,4 +49,44 @@ public class TimeStringToSecondsConverter {
 
         return totalSeconds;
     }
+
+    public static String convertToTimeString(long totalSeconds) {
+        long years = totalSeconds / (365 * 24 * 60 * 60);
+        totalSeconds %= (365 * 24 * 60 * 60);
+
+        long months = totalSeconds / (30 * 24 * 60 * 60);
+        totalSeconds %= (30 * 24 * 60 * 60);
+
+        long days = totalSeconds / (24 * 60 * 60);
+        totalSeconds %= (24 * 60 * 60);
+
+        long hours = totalSeconds / (60 * 60);
+        totalSeconds %= (60 * 60);
+
+        long minutes = totalSeconds / 60;
+        totalSeconds %= 60;
+
+        StringBuilder result = new StringBuilder();
+
+        if (years > 0)
+            result.append(years).append("Y ");
+
+        if (months > 0)
+            result.append(months).append("M ");
+
+        if (days > 0)
+            result.append(days).append("D ");
+
+        if (hours > 0)
+            result.append(hours).append("H ");
+
+        if (minutes > 0)
+            result.append(minutes).append("M ");
+
+        if (totalSeconds > 0)
+            result.append(totalSeconds).append("S ");
+
+        return result.toString().trim();
+    }
+
 }
