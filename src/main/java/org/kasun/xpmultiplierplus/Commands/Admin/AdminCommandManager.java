@@ -24,7 +24,9 @@ public class AdminCommandManager {
             }else if (args[1].equalsIgnoreCase("view")) {
                 new AdminView(sender, command, label, args);
             }else if (args[1].equalsIgnoreCase("take")) {
-                    new AdminTake(sender, command, label, args);
+                new AdminTake(sender, command, label, args);
+            }else if (args[1].equalsIgnoreCase("global")) {
+                 new AdminGlobal(sender, command, label, args);
             }else{
                 new AdminHelp(sender);
             }

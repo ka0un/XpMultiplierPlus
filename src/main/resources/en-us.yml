@@ -19,4 +19,5 @@ lang:
   admin-view-2: "&e - Multiplier : &f%multiplier% &eDuration : &f%duration%"
   admin-view-no-multipliers: "&c%player% doesn't have any multipliers!"
   admin-take-1: "&aSuccessfully took %player%'s multiplier!"
-
+  admin-global-alredy-is: "&cGlobal Multiplier is already %multiplier%!"
+  admin-global-set: "&aSuccessfully set Global Multiplier to %multiplier%!"

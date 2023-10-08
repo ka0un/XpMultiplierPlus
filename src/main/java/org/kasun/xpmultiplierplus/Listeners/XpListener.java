@@ -15,9 +15,9 @@ import java.util.UUID;
 
 public class XpListener implements Listener {
 
-    List<Multiplier> multipliers;
-    XpMultiplierPlus plugin = XpMultiplierPlus.getInstance();
-    MultiplierManager multiplierManager;
+    private List<Multiplier> multipliers;
+    private XpMultiplierPlus plugin = XpMultiplierPlus.getInstance();
+    private MultiplierManager multiplierManager;
 
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = false)
     public void onXpGain(PlayerExpChangeEvent event) {
@@ -26,18 +26,16 @@ public class XpListener implements Listener {
             multiplierManager = plugin.getMainManager().getMultiplierManager();
         }
 
+
         multipliers = plugin.getMainManager().getConfigManager().getMainConfig().multipliers;
         Player player = event.getPlayer();
         int xp = event.getAmount();
         UUID uuid = player.getUniqueId();
 
-        if (multiplierManager.getMultipliers().containsKey(uuid)) {
-            MultiplierProvider multiplierProvider = new MultiplierProvider(multiplierManager.getMultipliers());
-            Multiplier m = multiplierProvider.getPlayersBestMultiplier(uuid);
-            event.setAmount((int) (xp * m.getMultiplier()));
-            player.sendMessage("You have " + m.getMultiplier() + "X XP!");
-            return;
-        }
+        MultiplierProvider multiplierProvider = new MultiplierProvider(multiplierManager.getMultipliers());
+        Multiplier m = multiplierProvider.getPlayersBestMultiplier(uuid);
+        event.setAmount((int) (xp * m.getMultiplier()));
+        player.sendMessage("You have " + m.getMultiplier() + "X XP!");
 
     }
 }

@@ -1,4 +1,7 @@
 lang: en-us
+main-settings:
+  default-multiplier: 1
+
 multipliers:
   1:
     multiplier: 1

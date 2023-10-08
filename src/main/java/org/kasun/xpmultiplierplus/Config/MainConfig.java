@@ -1,5 +1,6 @@
 package org.kasun.xpmultiplierplus.Config;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.kasun.xpmultiplierplus.Multiplier.Multiplier;
@@ -17,6 +18,7 @@ public class MainConfig {
     private File configFile;
     private FileConfiguration config;
     public HashMap<String, String> langMap = new HashMap<>();
+    public double defaultMultiplier;
 
 
     public MainConfig() {
@@ -26,6 +28,12 @@ public class MainConfig {
         config = YamlConfiguration.loadConfiguration(configFile);
         loadLang();
         loadMultipliers();
+        loadMainSettings();
+    }
+
+    public void loadMainSettings(){
+        ConfigurationSection mainSection = config.getConfigurationSection("main-settings");
+        defaultMultiplier = mainSection.getDouble("default-multiplier");
     }
 
     public void loadLang(){

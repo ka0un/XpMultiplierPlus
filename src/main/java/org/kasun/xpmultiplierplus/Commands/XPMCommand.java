@@ -67,6 +67,7 @@ public class XPMCommand implements TabExecutor {
                 arguments2.add("give");
                 arguments2.add("take");
                 arguments2.add("view");
+                arguments2.add("global");
                 arguments2.add("reload");
                 return arguments2;
             case 3:
@@ -74,6 +75,11 @@ public class XPMCommand implements TabExecutor {
                 if (args[1].equalsIgnoreCase("give") || args[1].equalsIgnoreCase("view") || args[1].equalsIgnoreCase("take")){
                     for (Player player : plugin.getServer().getOnlinePlayers()){
                         arguments3.add(player.getName());
+                    }
+                }
+                if (args[1].equalsIgnoreCase("global")){
+                    for (Multiplier m: plugin.getMainManager().getConfigManager().getMainConfig().multipliers){
+                        arguments3.add(String.valueOf(m.getMultiplier()));
                     }
                 }
                 return arguments3;

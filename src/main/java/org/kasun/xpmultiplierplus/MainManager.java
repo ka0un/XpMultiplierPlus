@@ -26,6 +26,7 @@ public class MainManager {
         outdatedReminder = new OutdatedReminder(configManager);
         startupManager = new StartupManager(configManager, outdatedReminder);
         multiplierManager = new MultiplierManager();
+        multiplierManager.setDefaultMultiplier(configManager.getMainConfig().defaultMultiplier);
         commandsManager = new CommandsManager();
         listenerManager = new ListenerManager();
         runnableManager = new RunnableManager();
