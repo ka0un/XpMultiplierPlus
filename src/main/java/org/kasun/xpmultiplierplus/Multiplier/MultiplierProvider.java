@@ -2,6 +2,8 @@ package org.kasun.xpmultiplierplus.Multiplier;
 
 import org.kasun.xpmultiplierplus.XpMultiplierPlus;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -9,7 +11,6 @@ import java.util.UUID;
 public class MultiplierProvider {
     private HashMap<UUID, List<Multiplier>> multipliers;
     private MultiplierManager multiplierManager;
-    private double defaultMultiplier;
     private XpMultiplierPlus plugin = XpMultiplierPlus.getInstance();
 
     public MultiplierProvider(HashMap<UUID, List<Multiplier>> multipliers) {
@@ -21,15 +22,23 @@ public class MultiplierProvider {
     public Multiplier getPlayersBestMultiplier(UUID uuid) {
 
         multiplierManager = plugin.getMainManager().getMultiplierManager();
-        defaultMultiplier = multiplierManager.getDefaultMultiplier();
 
-        System.out.printf(String.valueOf(defaultMultiplier));
+        //best best global multiplier
+        ArrayList<GlobalMultiplier> globalMultipliers = multiplierManager.getGlobalMultipliers();
+        GlobalMultiplier bestGlobalMultiplier = globalMultipliers.get(0);
+        for (GlobalMultiplier globalMultiplier : globalMultipliers) {
+            if (bestGlobalMultiplier.getMultiplier() < globalMultiplier.getMultiplier()) {
+                bestGlobalMultiplier = globalMultiplier;
+            }
+        }
+
+
 
         List<Multiplier> playersMultipliers = multipliers.get(uuid);
-        Multiplier bestMultiplier = new Multiplier(defaultMultiplier, "");
+        Multiplier bestMultiplier = new Multiplier(bestGlobalMultiplier.getMultiplier(), "");
 
         if (playersMultipliers == null || playersMultipliers.isEmpty()) {
-            return new Multiplier(defaultMultiplier, "");
+            return new Multiplier(bestMultiplier.getMultiplier(), "");
         }
 
         for (Multiplier m : playersMultipliers) {
@@ -38,10 +47,10 @@ public class MultiplierProvider {
             }
         }
 
-        if (bestMultiplier.getMultiplier() > defaultMultiplier) {
+        if (bestMultiplier.getMultiplier() > bestGlobalMultiplier.getMultiplier()) {
             return bestMultiplier;
         }else{
-            return new Multiplier(defaultMultiplier, "");
+            return new Multiplier(bestGlobalMultiplier.getMultiplier(), "");
         }
 
     }

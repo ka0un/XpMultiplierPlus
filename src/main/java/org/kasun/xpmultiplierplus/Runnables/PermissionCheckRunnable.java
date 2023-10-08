@@ -3,6 +3,7 @@ package org.kasun.xpmultiplierplus.Runnables;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.kasun.xpmultiplierplus.Multiplier.GlobalMultiplier;
 import org.kasun.xpmultiplierplus.Multiplier.Multiplier;
 import org.kasun.xpmultiplierplus.Multiplier.MultiplierManager;
 import org.kasun.xpmultiplierplus.Multiplier.TempMultiplier;
@@ -90,6 +91,10 @@ public class PermissionCheckRunnable extends BukkitRunnable {
                 multiplierManager.getMultipliers().get(uuid).remove(removeMuliplierMap.get(uuid));
             }
         }
+
+        //if global multiplier outdated removes it
+        multiplierManager.getGlobalMultipliers().removeIf(globalMultiplier -> globalMultiplier.isTemp() == true && (globalMultiplier.getStartTimeStamp().getTime() + (globalMultiplier.getDurationSecounds() * 1000) < System.currentTimeMillis()));
+
 
     }
 }

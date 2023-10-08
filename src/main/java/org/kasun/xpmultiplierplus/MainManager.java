@@ -3,6 +3,7 @@ package org.kasun.xpmultiplierplus;
 import org.kasun.xpmultiplierplus.Commands.CommandsManager;
 import org.kasun.xpmultiplierplus.Config.ConfigManager;
 import org.kasun.xpmultiplierplus.Listeners.ListenerManager;
+import org.kasun.xpmultiplierplus.Multiplier.GlobalMultiplier;
 import org.kasun.xpmultiplierplus.Multiplier.MultiplierManager;
 import org.kasun.xpmultiplierplus.Runnables.RunnableManager;
 import org.kasun.xpmultiplierplus.Utils.FileManager;
@@ -26,7 +27,7 @@ public class MainManager {
         outdatedReminder = new OutdatedReminder(configManager);
         startupManager = new StartupManager(configManager, outdatedReminder);
         multiplierManager = new MultiplierManager();
-        multiplierManager.setDefaultMultiplier(configManager.getMainConfig().defaultMultiplier);
+        multiplierManager.getGlobalMultipliers().add(new GlobalMultiplier(configManager.getMainConfig().defaultMultiplier, false, 0 , null));
         commandsManager = new CommandsManager();
         listenerManager = new ListenerManager();
         runnableManager = new RunnableManager();

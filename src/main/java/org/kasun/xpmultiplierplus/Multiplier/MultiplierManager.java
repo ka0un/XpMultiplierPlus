@@ -1,19 +1,26 @@
 package org.kasun.xpmultiplierplus.Multiplier;
 
-
-import org.kasun.xpmultiplierplus.MainManager;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
 public class MultiplierManager {
     HashMap<UUID, List<Multiplier>> multipliers;
-    private Double defaultMultiplier;
+    ArrayList<GlobalMultiplier> globalMultipliers;
+
 
     public MultiplierManager() {
-        defaultMultiplier = new Double(0.0);
         multipliers = new HashMap<>();
+        globalMultipliers = new ArrayList<>();
+    }
+
+    public ArrayList<GlobalMultiplier> getGlobalMultipliers() {
+        return globalMultipliers;
+    }
+
+    public void setGlobalMultipliers(ArrayList<GlobalMultiplier> globalMultipliers) {
+        this.globalMultipliers = globalMultipliers;
     }
 
     public HashMap<UUID, List<Multiplier>> getMultipliers() {
@@ -26,11 +33,4 @@ public class MultiplierManager {
         this.multipliers = multipliers;
     }
 
-    public double getDefaultMultiplier() {
-        return defaultMultiplier;
-    }
-
-    public void setDefaultMultiplier(double defaultMultiplier) {
-        this.defaultMultiplier = defaultMultiplier;
-    }
 }

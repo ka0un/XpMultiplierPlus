@@ -91,6 +91,11 @@ public class XPMCommand implements TabExecutor {
                         arguments4.add(String.valueOf(m.getMultiplier()));
                     }
                 }
+                if (args[1].equalsIgnoreCase("global")){
+                    arguments4.add("PERMANENT");
+                    arguments4.add("5s");
+                    arguments4.add("1H");
+                }
                 return arguments4;
             case 5:
                 List<String> arguments5 = new ArrayList<>();

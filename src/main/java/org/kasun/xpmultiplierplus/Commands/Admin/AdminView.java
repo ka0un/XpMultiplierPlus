@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.kasun.xpmultiplierplus.Multiplier.Multiplier;
+import org.kasun.xpmultiplierplus.Multiplier.MultiplierProvider;
 import org.kasun.xpmultiplierplus.Multiplier.TempMultiplier;
 import org.kasun.xpmultiplierplus.Utils.ColorUtils;
 import org.kasun.xpmultiplierplus.Utils.TimeStringToSecondsConverter;
@@ -37,8 +38,13 @@ public class AdminView {
                 return;
             }
 
+            MultiplierProvider multiplierProvider = new MultiplierProvider(multiplierMap);
+            sender.sendMessage(ColorUtils.color(plugin.getMainManager().getConfigManager().getMainConfig().langMap.get("admin-view-1")).replace("%player%", player.getName()));
+            sender.sendMessage(" ");
+            sender.sendMessage(ColorUtils.color(plugin.getMainManager().getConfigManager().getMainConfig().langMap.get("admin-view-active")).replace("%multiplier%", multiplierProvider.getPlayersBestMultiplier(player.getUniqueId()).getMultiplier() + ""));
+            sender.sendMessage(" ");
+
             if (multiplierMap.containsKey(player.getUniqueId())){
-                sender.sendMessage(ColorUtils.color(plugin.getMainManager().getConfigManager().getMainConfig().langMap.get("admin-view-1")).replace("%player%", player.getName()));
                 for (Multiplier m : multiplierMap.get(player.getUniqueId())){
 
                     if (m instanceof TempMultiplier){

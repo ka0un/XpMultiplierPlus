@@ -17,7 +17,7 @@ lang:
   admin-multiplier-not-found: "&cMultiplier not found! you have to config it first!"
   admin-view-1: "&6%player%'s Available Multipliers"
   admin-view-2: "&e - Multiplier : &f%multiplier% &eDuration : &f%duration%"
+  admin-view-active: "&eActive Multiplier : &f%multiplier%"
   admin-view-no-multipliers: "&c%player% doesn't have any multipliers!"
   admin-take-1: "&aSuccessfully took %player%'s multiplier!"
-  admin-global-alredy-is: "&cGlobal Multiplier is already %multiplier%!"
   admin-global-set: "&aSuccessfully set Global Multiplier to %multiplier%!"
