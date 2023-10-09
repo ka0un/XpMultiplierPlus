@@ -18,6 +18,6 @@ lang:
   admin-view-1: "&6%player%'s Available Multipliers"
   admin-view-2: "&e - Multiplier : &f%multiplier% &eDuration : &f%duration%"
   admin-view-active: "&eActive Multiplier : &f%multiplier%"
-  admin-view-no-multipliers: "&c%player% doesn't have any multipliers!"
+  admin-view-no-multipliers: "&c%player% doesn't have any personal multipliers!"
   admin-take-1: "&aSuccessfully took %player%'s multiplier!"
   admin-global-set: "&aSuccessfully set Global Multiplier to %multiplier%!"
