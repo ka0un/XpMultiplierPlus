@@ -1,10 +1,12 @@
 package org.kasun.xpmultiplierplus.Listeners;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerExpChangeEvent;
+import org.kasun.xpmultiplierplus.ActionBar.DisplayXpCollectActionBar;
 import org.kasun.xpmultiplierplus.Multiplier.Multiplier;
 import org.kasun.xpmultiplierplus.Multiplier.MultiplierManager;
 import org.kasun.xpmultiplierplus.Multiplier.MultiplierProvider;
@@ -35,7 +37,7 @@ public class XpListener implements Listener {
         MultiplierProvider multiplierProvider = new MultiplierProvider(multiplierManager.getMultipliers());
         Multiplier m = multiplierProvider.getPlayersBestMultiplier(uuid);
         event.setAmount((int) (xp * m.getMultiplier()));
-        player.sendMessage("You have " + m.getMultiplier() + "X XP!");
+        DisplayXpCollectActionBar displayXpCollectActionBar = new DisplayXpCollectActionBar((int) (xp * m.getMultiplier()), m.getMultiplier(), player);
 
     }
 }

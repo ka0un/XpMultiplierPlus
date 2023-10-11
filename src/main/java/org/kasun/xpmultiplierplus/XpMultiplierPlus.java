@@ -1,6 +1,8 @@
 package org.kasun.xpmultiplierplus;
 
+import com.hakan.core.HCore;
 import org.bukkit.plugin.java.JavaPlugin;
+
 
 public final class XpMultiplierPlus extends JavaPlugin {
 
@@ -11,6 +13,7 @@ public final class XpMultiplierPlus extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         mainManager = new MainManager();
+        HCore.initialize(this);
 
 
     }

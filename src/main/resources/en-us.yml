@@ -21,3 +21,4 @@ lang:
   admin-view-no-multipliers: "&c%player% doesn't have any personal multipliers!"
   admin-take-1: "&aSuccessfully took %player%'s multiplier!"
   admin-global-set: "&aSuccessfully set Global Multiplier to %multiplier%!"
+  xp_collect_action_bar: "&a+[%xp% XP] [Multiplier : x%xpm_multiplier%]"

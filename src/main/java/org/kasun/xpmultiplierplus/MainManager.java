@@ -5,10 +5,12 @@ import org.kasun.xpmultiplierplus.Config.ConfigManager;
 import org.kasun.xpmultiplierplus.Listeners.ListenerManager;
 import org.kasun.xpmultiplierplus.Multiplier.GlobalMultiplier;
 import org.kasun.xpmultiplierplus.Multiplier.MultiplierManager;
+import org.kasun.xpmultiplierplus.Placeholders.PlaceholderManager;
 import org.kasun.xpmultiplierplus.Runnables.RunnableManager;
 import org.kasun.xpmultiplierplus.Utils.FileManager;
 import org.kasun.xpmultiplierplus.Utils.OutdatedReminder;
 import org.kasun.xpmultiplierplus.Utils.StartupManager;
+
 
 public class MainManager {
     private OutdatedReminder outdatedReminder;
@@ -19,6 +21,7 @@ public class MainManager {
     private CommandsManager commandsManager;
     private ListenerManager listenerManager;
     private RunnableManager runnableManager;
+    private PlaceholderManager placeholderManager;
 
 
     public MainManager() {
@@ -31,6 +34,7 @@ public class MainManager {
         commandsManager = new CommandsManager();
         listenerManager = new ListenerManager();
         runnableManager = new RunnableManager(configManager);
+        placeholderManager = new PlaceholderManager();
     }
 
 
