@@ -24,6 +24,7 @@ public class MainManager {
     private PlaceholderManager placeholderManager;
 
 
+
     public MainManager() {
         fileManager = new FileManager();
         configManager = new ConfigManager();
@@ -40,6 +41,14 @@ public class MainManager {
 
     //getters and setters
 
+
+    public PlaceholderManager getPlaceholderManager() {
+        return placeholderManager;
+    }
+
+    public void setPlaceholderManager(PlaceholderManager placeholderManager) {
+        this.placeholderManager = placeholderManager;
+    }
 
     public OutdatedReminder getOutdatedReminder() {
         return outdatedReminder;

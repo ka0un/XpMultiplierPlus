@@ -16,5 +16,6 @@ public class RunnableManager {
             debugRunnable.runTaskTimerAsynchronously(plugin, 0, 20 * debugPeriod).getTaskId();
         }
 
+
     }
 }

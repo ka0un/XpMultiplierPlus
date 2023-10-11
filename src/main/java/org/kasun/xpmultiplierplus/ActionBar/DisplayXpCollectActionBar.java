@@ -12,6 +12,7 @@ public class DisplayXpCollectActionBar {
     private int collectedXP;
     private double activeMultiplier;
     private Player player;
+
     private XpMultiplierPlus plugin = XpMultiplierPlus.getInstance();
 
     public DisplayXpCollectActionBar(int collectedXP, double activeMultiplier, Player player) {
@@ -22,7 +23,10 @@ public class DisplayXpCollectActionBar {
     }
 
     private String getActionBarMessage(){
-        String baseMessage = plugin.getMainManager().getConfigManager().getMainConfig().langMap.get("xp_collect_action_bar");
+
+        String baseMessage =  plugin.getMainManager().getConfigManager().getMainConfig().langMap.get("xp_collect_action_bar");
+
+
         String message = baseMessage.replace("%xp%", String.valueOf(collectedXP));
         String colouredMessage = ColorUtils.color(message);
 

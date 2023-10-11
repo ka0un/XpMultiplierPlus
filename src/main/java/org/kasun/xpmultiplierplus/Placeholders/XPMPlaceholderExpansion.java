@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.kasun.xpmultiplierplus.Multiplier.MultiplierProvider;
 import org.kasun.xpmultiplierplus.XpMultiplierPlus;
 
-public class MultiplierPlaceholder extends PlaceholderExpansion {
+public class XPMPlaceholderExpansion extends PlaceholderExpansion {
     XpMultiplierPlus plugin = XpMultiplierPlus.getInstance();
     @Override
     public String getIdentifier() {
@@ -28,6 +28,7 @@ public class MultiplierPlaceholder extends PlaceholderExpansion {
             MultiplierProvider multiplierProvider = new MultiplierProvider(plugin.getMainManager().getMultiplierManager().getMultipliers());
             return String.valueOf(multiplierProvider.getPlayersBestMultiplier(player.getUniqueId()).getMultiplier());
         }
+
         return null;
     }
 }
